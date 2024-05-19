@@ -14,14 +14,16 @@ Change the look of your toolbar with a single click!
 ![Screenshot3](https://steamuserimages-a.akamaihd.net/ugc/2483250226657726543/E905F1175BFFB970A97C3F53ABD99A77AF61B4BA/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 ![Screenshot4](https://steamuserimages-a.akamaihd.net/ugc/2483250226657753474/14A410C0D2CE412C5A92BBA713628EFF240C687D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
 
+
 ## 📋 Changelog
 
-### v1.0.2
-- Support for .url files
 ### v1.0.1
-- Fixed bug when path does not have game application
+- Color picker optimization
+- BetterBuy and Settings added
+- Chinese language by Google translator
 ### v1.0.0
 - Project start
+
 
 ## 📝 Feedback
 
