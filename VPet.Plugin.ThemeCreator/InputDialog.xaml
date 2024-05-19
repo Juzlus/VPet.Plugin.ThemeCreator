@@ -1,0 +1,29 @@
+﻿<Window x:Class="VPet.Plugin.ThemeCreator.InputDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:ll="clr-namespace:LinePutScript.Localization.WPF;assembly=LinePutScript.Localization.WPF"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:VPet.Plugin.ThemeCreator"
+        xmlns:pu="https://opensource.panuon.com/wpf-ui" AllowsTransparency="True"
+        Title="{ll:Str 'InputDialog'}" MouseLeftButtonDown="Move" Background="Transparent" ResizeMode="NoResize" Height="104" Width="200" WindowStyle="None">
+    <Border Background="{DynamicResource DARKPrimaryText}" CornerRadius="10" BorderThickness="2" BorderBrush="{DynamicResource DARKPrimary}">
+        <Grid VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33*" />
+                <RowDefinition Height="33*" />
+                <RowDefinition Height="33*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="{DynamicResource PrimaryText}" FontWeight="Bold" Text="{ll:Str 'ENTER CODE TO PASTENBIN'}" Grid.ColumnSpan="2" Name="PastenbinCode" TextAlignment="Center" Margin="10"/>
+            <TextBox Foreground="{DynamicResource PrimaryText}" x:Name="InputTextBox" Text="" TextAlignment="Center" MaxLength="8" Width="150" Margin="10, 0" Grid.Row="1" Grid.ColumnSpan="2" Style="{DynamicResource StandardTextBoxStyle}"/>
+            <Button Content="{ll:Str 'OK'}" Margin="25,10,15,0" Grid.Row="2" Click="OkButton" Background="{DynamicResource SecondaryLight}" BorderBrush="{DynamicResource SecondaryDark}"/>
+            <Button Content="{ll:Str 'CANCEL'}"  Grid.Row="2" Margin="15,10,25,0" Grid.Column="1" Click="CancelButton" Background="{DynamicResource SecondaryLight}" BorderBrush="{DynamicResource SecondaryDark}"/>
+        </Grid>
+    </Border>
+</Window>

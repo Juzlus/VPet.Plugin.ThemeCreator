@@ -1,0 +1,76 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.0": {
+      "ColorPickerLib/1.6.2.0": {
+        "dependencies": {
+          "Dirkster.NumericUpDownLib": "2.4.2"
+        },
+        "runtime": {
+          "ColorPickerLib.dll": {}
+        },
+        "resources": {
+          "cs-CZ/ColorPickerLib.resources.dll": {
+            "locale": "cs-CZ"
+          },
+          "de-DE/ColorPickerLib.resources.dll": {
+            "locale": "de-DE"
+          },
+          "es-ES/ColorPickerLib.resources.dll": {
+            "locale": "es-ES"
+          },
+          "fr-FR/ColorPickerLib.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "hi/ColorPickerLib.resources.dll": {
+            "locale": "hi"
+          },
+          "id-ID/ColorPickerLib.resources.dll": {
+            "locale": "id-ID"
+          },
+          "it-IT/ColorPickerLib.resources.dll": {
+            "locale": "it-IT"
+          },
+          "ja-JP/ColorPickerLib.resources.dll": {
+            "locale": "ja-JP"
+          },
+          "nl-NL/ColorPickerLib.resources.dll": {
+            "locale": "nl-NL"
+          },
+          "zh-CHS/ColorPickerLib.resources.dll": {
+            "locale": "zh-CHS"
+          },
+          "zh-CHT/ColorPickerLib.resources.dll": {
+            "locale": "zh-CHT"
+          }
+        }
+      },
+      "Dirkster.NumericUpDownLib/2.4.2": {
+        "runtime": {
+          "lib/netcoreapp3.0/NumericUpDownLib.dll": {
+            "assemblyVersion": "2.4.2.0",
+            "fileVersion": "2.4.2.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ColorPickerLib/1.6.2.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dirkster.NumericUpDownLib/2.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tqhNM6svNT6RA4husXLnqb5E1tBvfloqsrR4g6Wu2EbnUryxsf4V7roH6PIAeBY4yUl7dO6DUYfBwje5/Np3tA==",
+      "path": "dirkster.numericupdownlib/2.4.2",
+      "hashPath": "dirkster.numericupdownlib.2.4.2.nupkg.sha512"
+    }
+  }
+}

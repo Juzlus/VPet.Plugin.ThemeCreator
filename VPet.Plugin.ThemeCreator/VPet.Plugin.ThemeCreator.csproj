@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <TargetFramework>net8.0-windows</TargetFramework>
+	  <OutputType>Library</OutputType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+	  <UseWPF>true</UseWPF>
+	  <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="svg\copy-regular.png" />
+    <None Remove="svg\copy-regular.svg" />
+    <None Remove="svg\copy-solid.png" />
+    <None Remove="svg\copy-solid.svg" />
+    <None Remove="svg\eye-solid.png" />
+    <None Remove="svg\play-solid.png" />
+    <None Remove="svg\red-trash-solid.png" />
+    <None Remove="svg\star-regular.png" />
+    <None Remove="svg\star-regular.svg" />
+    <None Remove="svg\star-solid.png" />
+    <None Remove="svg\star-solid.svg" />
+    <None Remove="svg\trash-solid.png" />
+    <None Remove="svg\trash-solid.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LinePutScript" Version="1.11.6" />
+    <PackageReference Include="LinePutScript.Localization.WPF" Version="1.0.6" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Panuon.UI" Version="1.0.0" />
+    <PackageReference Include="Panuon.WPF" Version="1.1.0" />
+    <PackageReference Include="Panuon.WPF.UI" Version="1.2.1.1" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="Dirkster.ColorPickerLib" Version="1.6.2" />
+    <PackageReference Include="Dirkster.NumericUpDownLib" Version="2.4.2" />
+    <PackageReference Include="VPet-Simulator.Core" Version="1.1.0.1" />
+    <PackageReference Include="VPet-Simulator.Windows.Interface" Version="1.1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="svg\copy-regular.png" />
+    <Resource Include="svg\copy-solid.png" />
+    <Resource Include="svg\eye-solid.png" />
+    <Resource Include="svg\play-solid.png" />
+    <Resource Include="svg\red-trash-solid.png" />
+    <Resource Include="svg\star-regular.png" />
+    <Resource Include="svg\star-solid.png" />
+    <Resource Include="svg\trash-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="InputDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ProjectExtensions />
+</Project>
