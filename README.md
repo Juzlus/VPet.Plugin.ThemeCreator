@@ -7,6 +7,20 @@ Change the look of your toolbar with a single click!
 
  [Page on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3244663905).
 
+## ✨ Usage (NuGet package)
+- [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+- [Dirkster.ColorPickerLib](https://github.com/Dirkster99/ColorPickerLib)
+- [Dirkster.NumericUpDownLib](https://github.com/Dirkster99/NumericUpDownLib)
+- [LinePutScript](https://github.com/LorisYounger/LinePutScript?tab=readme-ov-file)
+- [LinePutScript.Localization.WPF](https://github.com/LorisYounger/LinePutScript.Localization.WPF)
+- [Microsoft.CSharp](https://github.com/dotnet/corefx)
+- [Panuon.UI](https://github.com/Mochengvia/PanuonUI)
+- [Panuon.WPF](https://github.com/Panuon/Panuon.WPF)
+- [Panuon.WPF.UI](https://github.com/Panuon/Panuon.WPF.UI)
+- [System.Data.DataSetExtensions](https://dot.net)
+- [VPet-Simulator.Core](https://github.com/LorisYounger/VPet)
+- [VPet-Simulator.Windows.Interface](https://github.com/LorisYounger/VPet)
+
 ## 🔥 Screenshots
 
 ![Screenshot1](https://steamuserimages-a.akamaihd.net/ugc/2504641605484648278/30505CB3E288256FCE5DAD8127A5D76FA4FCA455/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)
