@@ -14,7 +14,6 @@ using Panuon.WPF.UI;
 using System;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace VPet.Plugin.ThemeCreator
 {
@@ -24,7 +23,8 @@ namespace VPet.Plugin.ThemeCreator
 
         private string path;
         public string activeTheme;
-        public string version = "1.0.1";
+        public string version = "1.0.2";
+        private int attempts = 0;
 
         public winSettings themeSettings;
         private BrushConverter brushConverter = new BrushConverter();
@@ -58,10 +58,17 @@ namespace VPet.Plugin.ThemeCreator
 
         private async void SetUpVPetBetterBuy()
         {
-            if (Application.Current.Windows.Count < 2)
+            WindowX winBetterBuy = null;
+            foreach (WindowX winX in Application.Current.Windows)
+                if (winX.ToString() == "VPet_Simulator.Windows.winBetterBuy")
+                    winBetterBuy = winX;
+
+            if (winBetterBuy == null)
             {
                 await Task.Delay(1000);
-                this.SetUpVPetBetterBuy();
+                if (this.attempts <= 10)
+                    this.SetUpVPetBetterBuy();
+                this.attempts++;
                 return;
             }
 
@@ -72,17 +79,15 @@ namespace VPet.Plugin.ThemeCreator
                 this.SetUpVPetSettings();
             }
 
-            Window VPetBetterBuy = Application.Current.Windows[2];
-            VPetBetterBuy.Background = (Brush)Application.Current.Resources["Bb_bg1"];
+            winBetterBuy.Background = (Brush)Application.Current.Resources["Bb_bg1"];
+            winBetterBuy.SetValue(WindowXCaption.BackgroundProperty, (Brush)Application.Current.Resources["Bb_bg2"]);
+            winBetterBuy.SetValue(WindowXCaption.ForegroundProperty, (Brush)Application.Current.Resources["Bb_fg1"]);
+            winBetterBuy.SetValue(WindowXCaption.ShadowColorProperty, (Color)Application.Current.Resources["Bb_sh1"]);
+            winBetterBuy.BorderBrush = (Brush)Application.Current.Resources["Bb_bg3"];
+            winBetterBuy.BorderThickness = (Thickness)Application.Current.Resources["Bb_bt1"];
+            winBetterBuy.Opacity = (float)Application.Current.Resources["Bb_o1"];
 
-            VPetBetterBuy.SetValue(WindowXCaption.BackgroundProperty, (Brush)Application.Current.Resources["Bb_bg2"]);
-            VPetBetterBuy.SetValue(WindowXCaption.ForegroundProperty, (Brush)Application.Current.Resources["Bb_fg1"]);
-            VPetBetterBuy.SetValue(WindowXCaption.ShadowColorProperty, (Color)Application.Current.Resources["Bb_sh1"]);
-            VPetBetterBuy.BorderBrush = (Brush)Application.Current.Resources["Bb_bg3"];
-            VPetBetterBuy.BorderThickness = (Thickness)Application.Current.Resources["Bb_bt1"];
-            VPetBetterBuy.Opacity = (float)Application.Current.Resources["Bb_o1"];
-
-            Grid firstGrid = FindChild<Grid>(VPetBetterBuy);
+            Grid firstGrid = FindChild<Grid>(winBetterBuy);
             if (firstGrid != null)
             {
                 firstGrid.Background = (ImageBrush)Application.Current.Resources["Bb_ib1"];
@@ -91,73 +96,90 @@ namespace VPet.Plugin.ThemeCreator
                     firstBorder.Background = (Brush)Application.Current.Resources["Bb_bg19"];
             }
 
-            ListBox lsbCategory = (ListBox)VPetBetterBuy.FindName("LsbCategory");
-            lsbCategory.Background = (Brush)Application.Current.Resources["Bb_bg4"];
-            lsbCategory.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
-            lsbCategory.Margin = (Thickness)Application.Current.Resources["Bb_m1"];
-            lsbCategory.SetValue(ListBoxHelper.ItemsCornerRadiusProperty, (CornerRadius)Application.Current.Resources["Bb_cr1"]);
-            lsbCategory.SetValue(ListBoxHelper.ItemsSelectedBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg5"]);
-            lsbCategory.SetValue(ListBoxHelper.ItemsSelectedForegroundProperty, (Brush)Application.Current.Resources["Bb_bg6"]);
-            lsbCategory.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg15"]);
+            ListBox lsbCategory = (ListBox)winBetterBuy.FindName("LsbCategory");
+            if (lsbCategory != null)
+            {
+                lsbCategory.Background = (Brush)Application.Current.Resources["Bb_bg4"];
+                lsbCategory.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
+                lsbCategory.Margin = (Thickness)Application.Current.Resources["Bb_m1"];
+                lsbCategory.SetValue(ListBoxHelper.ItemsCornerRadiusProperty, (CornerRadius)Application.Current.Resources["Bb_cr1"]);
+                lsbCategory.SetValue(ListBoxHelper.ItemsSelectedBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg5"]);
+                lsbCategory.SetValue(ListBoxHelper.ItemsSelectedForegroundProperty, (Brush)Application.Current.Resources["Bb_bg6"]);
+                lsbCategory.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg15"]);
+            }
 
-            ListBox lsbSortRule = (ListBox)VPetBetterBuy.FindName("LsbSortRule");
-            lsbSortRule.Background = (Brush)Application.Current.Resources["Bb_bg7"];
-            lsbSortRule.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
-            lsbSortRule.SetValue(ListBoxHelper.ItemsCornerRadiusProperty, (CornerRadius)Application.Current.Resources["Bb_cr2"]);
-            lsbSortRule.SetValue(ListBoxHelper.ItemsSelectedBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg8"]);
-            lsbSortRule.SetValue(ListBoxHelper.ItemsSelectedForegroundProperty, (Brush)Application.Current.Resources["Bb_bg9"]);
-            lsbSortRule.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg16"]);
+            ListBox lsbSortRule = (ListBox)winBetterBuy.FindName("LsbSortRule");
+            if (lsbSortRule != null)
+            {
+                lsbSortRule.Background = (Brush)Application.Current.Resources["Bb_bg7"];
+                lsbSortRule.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
+                lsbSortRule.SetValue(ListBoxHelper.ItemsCornerRadiusProperty, (CornerRadius)Application.Current.Resources["Bb_cr2"]);
+                lsbSortRule.SetValue(ListBoxHelper.ItemsSelectedBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg8"]);
+                lsbSortRule.SetValue(ListBoxHelper.ItemsSelectedForegroundProperty, (Brush)Application.Current.Resources["Bb_bg9"]);
+                lsbSortRule.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg16"]);
+            }
 
-            ListBox lsbSortAsc = (ListBox)VPetBetterBuy.FindName("LsbSortAsc");
-            lsbSortAsc.Background = (Brush)Application.Current.Resources["Bb_bg10"];
-            lsbSortAsc.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
-            lsbSortAsc.SetValue(ListBoxHelper.ItemsCornerRadiusProperty, (CornerRadius)Application.Current.Resources["Bb_cr3"]);
-            lsbSortAsc.SetValue(ListBoxHelper.ItemsSelectedBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg11"]);
-            lsbSortAsc.SetValue(ListBoxHelper.ItemsSelectedForegroundProperty, (Brush)Application.Current.Resources["Bb_bg12"]);
-            lsbSortAsc.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg17"]);
+            ListBox lsbSortAsc = (ListBox)winBetterBuy.FindName("LsbSortAsc");
+            if (lsbSortAsc != null)
+            {
+                lsbSortAsc.Background = (Brush)Application.Current.Resources["Bb_bg10"];
+                lsbSortAsc.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
+                lsbSortAsc.SetValue(ListBoxHelper.ItemsCornerRadiusProperty, (CornerRadius)Application.Current.Resources["Bb_cr3"]);
+                lsbSortAsc.SetValue(ListBoxHelper.ItemsSelectedBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg11"]);
+                lsbSortAsc.SetValue(ListBoxHelper.ItemsSelectedForegroundProperty, (Brush)Application.Current.Resources["Bb_bg12"]);
+                lsbSortAsc.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["Bb_bg17"]);
+            }
 
-            ItemsControl icCommodity = (ItemsControl)VPetBetterBuy.FindName("IcCommodity");
-            icCommodity.Background = (Brush)Application.Current.Resources["Bb_bg13"];
-            icCommodity.Visibility = Visibility.Hidden;
+            ItemsControl icCommodity = (ItemsControl)winBetterBuy.FindName("IcCommodity");
+            if (icCommodity != null)
+            {
+                icCommodity.Background = (Brush)Application.Current.Resources["Bb_bg13"];
+                icCommodity.Visibility = Visibility.Hidden;
+            }
 
-            TextBox tbPage = (TextBox)VPetBetterBuy.FindName("TbPage");
-            tbPage.Background = (Brush)Application.Current.Resources["Bb_bg4"];
-            tbPage.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
+            TextBox tbPage = (TextBox)winBetterBuy.FindName("TbPage");
+            if (tbPage != null)
+            {
+                tbPage.Background = (Brush)Application.Current.Resources["Bb_bg4"];
+                tbPage.Foreground = (Brush)Application.Current.Resources["Bb_bg18"];
+            }
 
             if (this._initialized) return;
             MenuItem settingsButton = (MenuItem)this.MW.Main.ToolBar.MenuSetting.Items[this.MW.Main.ToolBar.MenuSetting.Items.Count - 1];
-            settingsButton.Click += RefreshVPetSettings;
+            if (settingsButton != null)
+                settingsButton.Click += RefreshVPetSettings;
 
-            icCommodity.ItemContainerGenerator.ItemsChanged += async(sender, args) =>
-            {
-                Grid firstGrid = FindChild<Grid>(VPetBetterBuy);
-                if (firstGrid != null)
+            if (icCommodity != null)
+                icCommodity.ItemContainerGenerator.ItemsChanged += async(sender, args) =>
                 {
-                    firstGrid.Background = (ImageBrush)Application.Current.Resources["Bb_ib1"];
-                    Border firstBorder = FindChild<Border>(firstGrid);
-                    if (firstBorder != null)
-                        firstBorder.Background = (Brush)Application.Current.Resources["Bb_bg19"];
-                }
+                    Grid firstGrid = FindChild<Grid>(winBetterBuy);
+                    if (firstGrid != null)
+                    {
+                        firstGrid.Background = (ImageBrush)Application.Current.Resources["Bb_ib1"];
+                        Border firstBorder = FindChild<Border>(firstGrid);
+                        if (firstBorder != null)
+                            firstBorder.Background = (Brush)Application.Current.Resources["Bb_bg19"];
+                    }
 
-                icCommodity.Visibility = Visibility.Hidden;
-                ItemContainerGenerator itemsControl = (sender as ItemContainerGenerator);
-                await Task.Delay(100);
-                foreach (var item in itemsControl.Items)
-                {
-                    ContentPresenter contentPresenter = itemsControl.ContainerFromItem(item) as ContentPresenter;
-                    if (contentPresenter == null) continue;
-                    Border border = FindChild<Border>(contentPresenter);
-                    if (border == null) continue;
-                    border.Background = (SolidColorBrush)Application.Current.TryFindResource("Bb_bg14");
-                    border.CornerRadius = (CornerRadius)Application.Current.TryFindResource("Bb_cr4");
+                    icCommodity.Visibility = Visibility.Hidden;
+                    ItemContainerGenerator itemsControl = (sender as ItemContainerGenerator);
+                    await Task.Delay(100);
+                    foreach (var item in itemsControl.Items)
+                    {
+                        ContentPresenter contentPresenter = itemsControl.ContainerFromItem(item) as ContentPresenter;
+                        if (contentPresenter == null) continue;
+                        Border border = FindChild<Border>(contentPresenter);
+                        if (border == null) continue;
+                        border.Background = (SolidColorBrush)Application.Current.TryFindResource("Bb_bg14");
+                        border.CornerRadius = (CornerRadius)Application.Current.TryFindResource("Bb_cr4");
 
-                    TextBlock textBlock = FindChild<TextBlock>(contentPresenter);
-                    if (textBlock != null)
-                        textBlock.Foreground = (SolidColorBrush)Application.Current.TryFindResource("SecondaryText");
+                        TextBlock textBlock = FindChild<TextBlock>(contentPresenter);
+                        if (textBlock != null)
+                            textBlock.Foreground = (SolidColorBrush)Application.Current.TryFindResource("SecondaryText");
 
-                    icCommodity.Visibility = Visibility.Visible;
-                }
-            };
+                        icCommodity.Visibility = Visibility.Visible;
+                    }
+                };
             this._initialized = true;
         }
 
@@ -170,29 +192,32 @@ namespace VPet.Plugin.ThemeCreator
         
         private void SetUpVPetSettings()
         {
-            if (Application.Current.Windows.Count < 2)
+            WindowX winGameSettings = null;
+            foreach (WindowX winX in Application.Current.Windows)
+                if (winX.ToString() == "VPet_Simulator.Windows.winGameSetting")
+                    winGameSettings = winX;
+
+            if (winGameSettings == null)
                 return;
 
-            Window VPetSettings = Application.Current.Windows[1];
-            VPetSettings.Background = (Brush)Application.Current.Resources["St_bg1"];
+            winGameSettings.Background = (Brush)Application.Current.Resources["St_bg1"];
+            winGameSettings.SetValue(WindowXCaption.BackgroundProperty, (Brush)Application.Current.Resources["St_bg2"]);
+            winGameSettings.SetValue(WindowXCaption.ForegroundProperty, (Brush)Application.Current.Resources["Bb_fg1"]);
+            winGameSettings.SetValue(WindowXCaption.ShadowColorProperty, (Color)Application.Current.Resources["St_sh1"]);
+            winGameSettings.BorderBrush = (Brush)Application.Current.Resources["St_bg3"];
+            winGameSettings.BorderThickness = (Thickness)Application.Current.Resources["St_bt1"];
+            winGameSettings.Opacity = (float)Application.Current.Resources["St_o1"];
 
-            VPetSettings.SetValue(WindowXCaption.BackgroundProperty, (Brush)Application.Current.Resources["St_bg2"]);
-            VPetSettings.SetValue(WindowXCaption.ForegroundProperty, (Brush)Application.Current.Resources["Bb_fg1"]);
-            VPetSettings.SetValue(WindowXCaption.ShadowColorProperty, (Color)Application.Current.Resources["St_sh1"]);
-            VPetSettings.BorderBrush = (Brush)Application.Current.Resources["St_bg3"];
-            VPetSettings.BorderThickness = (Thickness)Application.Current.Resources["St_bt1"];
-            VPetSettings.Opacity = (float)Application.Current.Resources["St_o1"];
-
-            ListBox listMenu = (ListBox)VPetSettings.FindName("ListMenu");
+            ListBox listMenu = (ListBox)winGameSettings.FindName("ListMenu");
             listMenu.Background = (Brush)Application.Current.Resources["St_bg4"];
             listMenu.SetValue(ListBoxHelper.ItemsHoverBackgroundProperty, (Brush)Application.Current.Resources["St_bg5"]);
             listMenu.Foreground = (Brush)Application.Current.Resources["St_fg1"];
 
-            ListBox LBHave = (ListBox)VPetSettings.FindName("LBHave");
+            ListBox LBHave = (ListBox)winGameSettings.FindName("LBHave");
             LBHave.Background = Brushes.Transparent;
             LBHave.Foreground = (Brush)Application.Current.Resources["St_fg1"];
 
-            NumberInput numBackupSaveMaxNum = (NumberInput)VPetSettings.FindName("numBackupSaveMaxNum");
+            NumberInput numBackupSaveMaxNum = (NumberInput)winGameSettings.FindName("numBackupSaveMaxNum");
             numBackupSaveMaxNum.Background = Brushes.Transparent;
             numBackupSaveMaxNum.BorderBrush = (Brush)Application.Current.Resources["DARKPrimary"];
 
@@ -207,10 +232,10 @@ namespace VPet.Plugin.ThemeCreator
             borderFactory.AppendChild(contentControlFactory);
             dataTemplate.VisualTree = borderFactory;
 
-            TabControl mainTab = (TabControl)VPetSettings.FindName("MainTab");
+            TabControl mainTab = (TabControl)winGameSettings.FindName("MainTab");
             mainTab.ContentTemplate = dataTemplate;
 
-            Grid firstGrid = FindChild<Grid>(VPetSettings);
+            Grid firstGrid = FindChild<Grid>(winGameSettings);
             if (firstGrid != null)
                 firstGrid.Background = (ImageBrush)Application.Current.Resources["St_ib1"];
         }
