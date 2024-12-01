@@ -59,9 +59,9 @@ namespace VPet.Plugin.ThemeCreator
         private async void SetUpVPetBetterBuy()
         {
             WindowX winBetterBuy = null;
-            foreach (WindowX winX in Application.Current.Windows)
+            foreach (object winX in Application.Current.Windows)
                 if (winX.ToString() == "VPet_Simulator.Windows.winBetterBuy")
-                    winBetterBuy = winX;
+                    winBetterBuy = (WindowX)winX;
 
             if (winBetterBuy == null)
             {
@@ -193,9 +193,9 @@ namespace VPet.Plugin.ThemeCreator
         private void SetUpVPetSettings()
         {
             WindowX winGameSettings = null;
-            foreach (WindowX winX in Application.Current.Windows)
+            foreach (object winX in Application.Current.Windows)
                 if (winX.ToString() == "VPet_Simulator.Windows.winGameSetting")
-                    winGameSettings = winX;
+                    winGameSettings = (WindowX)winX;
 
             if (winGameSettings == null)
                 return;
